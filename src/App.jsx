@@ -8,8 +8,6 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import ImageModal from "./components/ImageModal/ImageModal";
 import styles from "./App.module.css";
 
-const API_KEY = "Qa-QDs14q-HAkd8Z1f__LM4xougcVa8iCnfP6G1V-88";
-
 const App = () => {
   const [images, setImages] = useState([]);
   const [query, setQuery] = useState("");
@@ -17,6 +15,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [modalImage, setModalImage] = useState(null);
+
+  const API_URL = "https://api.unsplash.com/search/photos";
+  const API_KEY = "Qa-QDs14q-HAkd8Z1f__LM4xougcVa8iCnfP6G1V-88";
 
   useEffect(() => {
     if (!query) return;
@@ -26,17 +27,12 @@ const App = () => {
       setError(null);
 
       try {
-        const response = await axios.get(
-          "https://api.unsplash.com/photos/?client_id=Qa-QDs14q-HAkd8Z1f__LM4xougcVa8iCnfP6G1V-88",
-          {
-            params: { query, page, per_page: 12 },
-            headers: {
-              Authorization: `Client-ID ${
-                Qa - QDs14q - HAkd8Z1f__LM4xougcVa8iCnfP6G1V - 88
-              }`,
-            },
-          }
-        );
+        const response = await axios.get(API_URL, {
+          params: { query, page, per_page: 12 },
+          headers: {
+            Authorization: `Client-ID ${API_KEY}`,
+          },
+        });
         setImages((prev) => [...prev, ...response.data.results]);
       } catch (err) {
         setError(err.message);
