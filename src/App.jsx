@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import axios from "axios";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
@@ -79,6 +80,7 @@ const App = () => {
           image={modalImage}
         />
       )}
+      <Toaster position="top-right" />
     </div>
   );
 };
